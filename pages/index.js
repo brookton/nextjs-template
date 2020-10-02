@@ -1,7 +1,16 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import useSwr from 'swr'
+import Link from 'next/link'
+
+const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
+  const { data, error } = useSwr('/api/users', fetcher)
+
+  if (error) return <div><Head><title>Failed to load users</title></Head></div>
+  if (!data) return <div><Head><title>Loading...</title></Head></div>
+
   return (
     <div className={styles.container}>
       <Head>
@@ -18,6 +27,11 @@ export default function Home() {
           Get started by editing{' '}
           <code className={styles.code}>pages/index.js</code>
         </p>
+      <p className={styles.text}>
+        To test the CORS route, open the console in a new tab on a different
+        domain and make a POST / GET / OPTIONS request to <b>/api/cors</b>. Using
+        a different method from those mentioned will be blocked by CORS
+      </p>
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
@@ -51,14 +65,15 @@ export default function Home() {
       </main>
 
       <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
+          <ul>
+          {data.map((user) => (
+            <li key={user.id}>
+              <Link href="/user/[id]" as={`/user/${user.id}`}>
+                <a>{`User ${user.id}`}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </footer>
     </div>
   )

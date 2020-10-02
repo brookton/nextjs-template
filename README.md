@@ -28,3 +28,28 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Build it with Docker
+
+```bash
+# build
+docker build -t next-app .
+# or, use multi-stage builds to build a smaller docker image
+docker build -t next-app -f ./Dockerfile.multistage .
+```
+
+Alternatively you can add these commands as scripts to your package.json and simply run
+
+`yarn build-docker`
+or
+`yarn build-docker-multistage`
+
+Run the docker image:
+
+```bash
+docker run --rm -it \
+  -p 3000:3000 \
+  next-app
+```
+
+or use `yarn build-docker-multistage`

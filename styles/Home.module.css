@@ -115,6 +115,11 @@
   height: 1em;
 }
 
+.text {
+  text-align: center;
+  max-width: 600px;
+}
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
