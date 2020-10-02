@@ -3,6 +3,14 @@ import styles from '../styles/Home.module.css'
 import useSwr from 'swr'
 import Link from 'next/link'
 
+
+// Socail Cards Info
+// The minimum size you should use is 200 x 200 pixels
+// Images smaller than 600 x 315 pixels will often be styled differently on 
+// Facebook and Twitter (it will be on the side of the link text, rather than big and in the middle of everything)
+// For most cards that appear on Twitter and Facebook, images that are 1200 x 630 pixels have the best display on high resolution
+// https://www.learnwithjason.dev/blog/auto-generate-social-image/
+
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
 export default function Home() {
@@ -14,6 +22,16 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
+        {/* Twitter Social Card*/}
+        {/* <meta name="twitter:card" content="summary" key="twcard" />
+        <meta name="twitter:creator" content={twitterHandle} key="twhandle" /> */}
+
+        {/* Open Graph Social Card */}
+        {/* <meta property="og:url" content={currentURL} key="ogurl" />
+        <meta property="og:image" content={previewImage} key="ogimage" />
+        <meta property="og:site_name" content={siteName} key="ogsitename" />
+        <meta property="og:title" content={pageTitle} key="ogtitle" />
+        <meta property="og:description" content={description} key="ogdesc" /> */}
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
